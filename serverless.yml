@@ -1,0 +1,29 @@
+service: advent-of-code-2020
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-plugin-warmup
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${env:stage, dev}
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:DeleteItem
+        - dynamodb:UpdateItem
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - lambda:InvokeFunction
+      Resource: "*"
+
+functions:
+  testerFunction:
+    handler: app/private/tester.tester
+    description: Used for testing functions
