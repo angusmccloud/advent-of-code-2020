@@ -26,7 +26,7 @@ const countValidPasswords = (inputData = []) => {
         // console.log('-- Password --', password);
         // console.log('Count of Letter', countOfLetter);
     }
-    return validPasswords;
+    return `There are ${validPasswords} Valid Passwords`;
 }
 
 module.exports = countValidPasswords; 
