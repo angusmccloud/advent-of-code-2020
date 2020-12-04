@@ -6,6 +6,8 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const { upperCaseFirst } = require('upper-case-first');
 const he = require('he');
 
+const getLeaderboardJSON = require('../functions/get-leaderboard');
+
 const day1Data = require('../functions/day-1/source-data');
 const sumTwoValues = require('../functions/day-1/sum-two-values');
 const sumThreeValues = require('../functions/day-1/sum-three-values');
@@ -23,6 +25,8 @@ const passportValidationV2 = require('../functions/day-4/passport-validation-v2'
 
 module.exports.tester = async () => { 
   const timestamp = new Date().getTime(); 
+
+  // console.log(await getLeaderboardJSON());
 
   // Day 1
   // const inputDataDay1 = await day1Data();
@@ -52,18 +56,18 @@ module.exports.tester = async () => {
   // console.log(result);
 
   // Day 4
-  const inputDataDay4 = await day4Data();
-  console.log('-- Day 4, Question 1 --');
-  console.log(await passportValidation(inputDataDay4));
-  console.log('-- Day 4, Question 2 --');
-  const v2ValidationRules = [
-    {field: 'byr', type: 'number', min: 1920, max: 2002},
-    {field: 'iyr', type: 'number', min: 2010, max: 2020}, 
-    {field: 'eyr', type: 'number', min: 2020, max: 2030},
-    {field: 'hgt', type: 'string'},
-    {field: 'hcl', type: 'string'},
-    {field: 'ecl', type: 'inList', list: ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']},
-    {field: 'pid', type: 'numberLength', minLength: 9, maxLength: 9}
-  ];
-  console.log(await passportValidationV2(inputDataDay4, v2ValidationRules));
+  // const inputDataDay4 = await day4Data();
+  // console.log('-- Day 4, Question 1 --');
+  // console.log(await passportValidation(inputDataDay4));
+  // console.log('-- Day 4, Question 2 --');
+  // const v2ValidationRules = [
+  //   {field: 'byr', type: 'number', min: 1920, max: 2002},
+  //   {field: 'iyr', type: 'number', min: 2010, max: 2020}, 
+  //   {field: 'eyr', type: 'number', min: 2020, max: 2030},
+  //   {field: 'hgt', type: 'string'},
+  //   {field: 'hcl', type: 'string'},
+  //   {field: 'ecl', type: 'inList', list: ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']},
+  //   {field: 'pid', type: 'numberLength', minLength: 9, maxLength: 9}
+  // ];
+  // console.log(await passportValidationV2(inputDataDay4, v2ValidationRules));
 };

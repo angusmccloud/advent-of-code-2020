@@ -5,11 +5,13 @@ const passportValidationV2 = (inputData = [], requiredFields = []) => {
     let invalidPassports = 0;
 
     let currentRecord = {};
+    let fullRecords = 0;
     for (let i = 0; i < inputData.length; i++) {
         const thisRow = inputData[i];
         if(thisRow.length === 0) {
             // NEW RECORD
-            const isValid = checkAllFields(currentRecord, requiredFields);
+            const isValid = checkAllFields(currentRecord, requiredFields, fullRecords);
+            fullRecords++;
             if(isValid) {
                 validPassports ++;
             } else {
@@ -29,7 +31,7 @@ const passportValidationV2 = (inputData = [], requiredFields = []) => {
         
         // console.log(`Row ${i}, column ${targetColumn}, row length is ${rowLength}, remainder?? ${realColumn}, Character ${charAtPosition}, Total Trees ${trees}`);
     }
-    const isValid = checkAllFields(currentRecord, requiredFields);
+    const isValid = checkAllFields(currentRecord, requiredFields, fullRecords);
     if(isValid) {
         validPassports ++;
     } else {
@@ -39,7 +41,7 @@ const passportValidationV2 = (inputData = [], requiredFields = []) => {
     return validPassports;
 }
 
-const checkAllFields = (currentRecord, requiredFields) => {
+const checkAllFields = (currentRecord, requiredFields, i = 0) => {
     // console.log(currentRecord);
     let validRecord = true;
     for(let i = 0; i < requiredFields.length; i++) {
@@ -91,6 +93,8 @@ const checkAllFields = (currentRecord, requiredFields) => {
             }
         }
     }
+
+    console.log(validRecord, i);
 
     return validRecord;
 }
