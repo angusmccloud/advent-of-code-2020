@@ -26,7 +26,7 @@ const passportValidationV2 = require('../functions/day-4/passport-validation-v2'
 module.exports.tester = async () => { 
   const timestamp = new Date().getTime(); 
 
-  // console.log(await getLeaderboardJSON());
+  console.log(await getLeaderboardJSON());
 
   // Day 1
   // const inputDataDay1 = await day1Data();

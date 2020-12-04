@@ -7,24 +7,17 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 const getLeaderboardJSON = async () => {
   const timestamp = new Date().getTime();
-  const currentData = await dynamoScanAllRows();
-  // console.log(currentData);
-  let result;
-  if(currentData[0] !== undefined) {
+  const currentData = await dynamoScanAllRows(process.env.LEADERBOARD_TABLE, 'leaderboardId, leaderboardObject, createdTime, updatedTime', `activeFlag = :active`, { ':active': true }, 'leaderboardId');
+  if (currentData[0] !== undefined) { // Need to handle the first time it runs, gets no results, and so there's no timestamp to compare to
     const lastUpdatedTime = currentData[0].updatedTime;
-    if(timestamp - lastUpdatedTime > 15 * 60 * 1000) { // 15 minutes (in milliseconds)
-      result = await getLatestLeaderboard(currentData[0].leaderboardId);  
-      console.log('Fetching new data');
+    if (timestamp - lastUpdatedTime > 15 * 60 * 1000) { // 15 minutes (in milliseconds)
+      return await getLatestLeaderboard(currentData[0].leaderboardId);
     } else {
-      result = JSON.parse(currentData[0].leaderboardObject);
-      console.log('Using cached data');
+      return JSON.parse(currentData[0].leaderboardObject);
     }
   } else {
-    // Need to handle the first time it runs, gets no results, and so there's no timestamp to compare to
-    result = await getLatestLeaderboard(currentData[0].leaderboardId);  
-    console.log('Fetching new data');
+    return await getLatestLeaderboard('');
   }
-  return result;
 };
 
 module.exports = getLeaderboardJSON;
@@ -43,13 +36,12 @@ const getLatestLeaderboard = async (currentId) => {
     },
   };
   // console.log("Options", options);
- 
+
   let response;
   let goodResult = false;
-  while(!goodResult) {
+  while (!goodResult) {
     await rp(options)
       .then(function (parsedBody) {
-        // console.log("Data fetched successfully");
         response = JSON.parse(parsedBody);
         const timestamp = new Date().getTime();
         const leaderboardObject = {
@@ -74,14 +66,14 @@ const getLatestLeaderboard = async (currentId) => {
   return response;
 }
 
-const dynamoScanAllRows = async (tableName = process.env.LEADERBOARD_TABLE, fields = 'leaderboardId, leaderboardObject, createdTime, updatedTime', filterExpression = `activeFlag = :active`, expressionAttributeValues = {':active': true}, tableUniqueKey = 'leaderboardId') => {
+const dynamoScanAllRows = async (tableName = process.env.LEADERBOARD_TABLE, fields = 'leaderboardId, leaderboardObject, createdTime, updatedTime', filterExpression = `activeFlag = :active`, expressionAttributeValues = { ':active': true }, tableUniqueKey = 'leaderboardId') => {
   console.log('Fetching All Data from DynamoDB Table');
   let fetchMoreData = true;
   let allRows = [];
   let startKey;
   let params;
 
-  while (fetchMoreData){
+  while (fetchMoreData) {
     if (!startKey) {
       params = {
         TableName: tableName,
@@ -106,7 +98,7 @@ const dynamoScanAllRows = async (tableName = process.env.LEADERBOARD_TABLE, fiel
     const result = await dynamoDb.scan(params).promise();
     let thisResult = result.Items;
     allRows = allRows.concat(thisResult);
-    if(result.LastEvaluatedKey){
+    if (result.LastEvaluatedKey) {
       startKey = result.LastEvaluatedKey[tableUniqueKey];
     } else {
       fetchMoreData = false;
