@@ -52,8 +52,8 @@ functions:
     handler: app/private/tester.tester
     description: Used for testing functions
   getLeaderboard:
-    warmup: true
-    prewarm: true
+    warmup: ${env:preWarm}
+    prewarm: ${env:preWarm}
     handler: app/public/publish-leaderboard-to-slack.get
     description: Get the current Leaderboard in Slack Block Kit format
     events:

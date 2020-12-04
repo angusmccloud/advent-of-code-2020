@@ -12,11 +12,12 @@ module.exports.get = async (event, context, callback) => {
 
     const leaderboardData = await getLeaderboardJSON();
     let leaderboard = [];
-    let keys = Object.keys(leaderboardData.members);
+    const keys = Object.keys(leaderboardData.members);
     for (let i = 0; i < keys.length; i++) {
         const record = leaderboardData.members[keys[i]];
         leaderboard.push(record);
     }
+
     leaderboard.sort((a, b) => (a.local_score < b.local_score) ? 1 : -1);
     let message = '*Advent of Code 2020 Leaderboard*';
     let rank = 0;
@@ -42,7 +43,6 @@ module.exports.get = async (event, context, callback) => {
 
         message = message + `\n${rankText}${name} with ${score} points and ${stars} stars`;
     }
-    // console.log(message);
 
     return callback(null, {
         statusCode: 200,
