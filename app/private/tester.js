@@ -23,10 +23,15 @@ const day4Data = require('../functions/day-4/source-data');
 const passportValidation = require('../functions/day-4/passport-validation');
 const passportValidationV2 = require('../functions/day-4/passport-validation-v2');
 
+const day5Data = require('../functions/day-5/source-data');
+const getAllSeats = require('../functions/day-5/get-all-seats');
+const getMissingSeat = require('../functions/day-5/get-missing-seat');
+
 module.exports.tester = async () => { 
   const timestamp = new Date().getTime(); 
 
-  console.log(await getLeaderboardJSON());
+  // Leaderboard Data
+  // console.log(await getLeaderboardJSON());
 
   // Day 1
   // const inputDataDay1 = await day1Data();
@@ -70,4 +75,14 @@ module.exports.tester = async () => {
   //   {field: 'pid', type: 'numberLength', minLength: 9, maxLength: 9}
   // ];
   // console.log(await passportValidationV2(inputDataDay4, v2ValidationRules));
+
+  // Day 5
+  const inputDataDay5 = await day5Data();
+  console.log('-- Day 5, Question 1 --');
+  let allSeats = await getAllSeats(inputDataDay5);
+  allSeats.sort((a, b) => (a.seatId < b.seatId) ? 1 : -1);
+  console.log(allSeats[0].seatId);
+  console.log('-- Day 5, Question 2 --');
+  allSeats.sort((a, b) => (a.seatId > b.seatId) ? 1 : -1); // Switch the data so it's counting up instead of down
+  console.log(await getMissingSeat(allSeats));
 };
