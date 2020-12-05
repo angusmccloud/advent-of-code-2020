@@ -16,6 +16,12 @@ Instructions can be found here `https://www.serverless.com/framework/docs/provid
 
 You can now run `serverless deploy` to create the AWS items (Lambda functions and Dynamo DB Tables)
 
+## Notes on the project
+
+> All of the source-data files are using my puzzle inputs, make sure you update them with your data
+
+> If you're using the Slack Integration, you'll want to update the Emojis object in publish-leaderboard-to-slack as the time-turner Emoji isn't an OOTB emoji and is custom to my workspace.
+
 ## Some notes on using Serverless framework once you've done initial deploy
 `sls deploy` deploys the current code using the configuration in `.env.development`
 
