@@ -6,25 +6,13 @@ const getAllSeats = (inputData = [], numOfRows = 7, numOfColumns = 3) => {
         let record = inputData[i];
         let rowData = record.substr(0, numOfRows);
         let columnData = record.substr(-numOfColumns);
-        
-        // console.log(rowData, columnData);
-        let colNum = 0;
-        let rowNum = 0;
+        rowData = rowData.replace(/B/g, '1');
+        rowData = rowData.replace(/F/g, '0');
+        columnData = columnData.replace(/R/g, '1');
+        columnData = columnData.replace(/L/g, '0');
 
-        for (let ii = 0; ii < rowData.length; ii++) {
-            let char = rowData.charAt(ii);
-            if(char === 'B') {
-                rowNum = rowNum + (Math.pow(2, (rowData.length - ii - 1)));
-            }
-        }
-        for (let ii = 0; ii < columnData.length; ii++) {
-            let char = columnData.charAt(ii);
-            if(char === 'R') {
-                colNum = colNum + (Math.pow(2, (columnData.length - ii - 1)));
-            }
-        }
-        // console.log('RowNum', rowNum);
-        // console.log('ColNum', colNum);
+        let rowNum = parseInt(rowData, 2); // Convert Binary to Number
+        let colNum = parseInt(columnData, 2); // Convert Binary to Number
         
         const result = {
             record: record,

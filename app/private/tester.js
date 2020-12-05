@@ -77,12 +77,12 @@ module.exports.tester = async () => {
   // console.log(await passportValidationV2(inputDataDay4, v2ValidationRules));
 
   // Day 5
-  // const inputDataDay5 = await day5Data();
-  // console.log('-- Day 5, Question 1 --');
-  // let allSeats = await getAllSeats(inputDataDay5);
-  // allSeats.sort((a, b) => (a.seatId < b.seatId) ? 1 : -1);
-  // console.log(allSeats[0].seatId);
-  // console.log('-- Day 5, Question 2 --');
-  // allSeats.sort((a, b) => (a.seatId > b.seatId) ? 1 : -1); // Switch the data so it's counting up instead of down
-  // console.log(await getMissingSeat(allSeats));
+  const inputDataDay5 = await day5Data();
+  console.log('-- Day 5, Question 1 --');
+  let allSeats = await getAllSeats(inputDataDay5);
+  allSeats.sort((a, b) => (a.seatId < b.seatId) ? 1 : -1);
+  console.log(allSeats[0].seatId);
+  console.log('-- Day 5, Question 2 --');
+  allSeats.sort((a, b) => (a.seatId > b.seatId) ? 1 : -1); // Switch the data so it's counting up instead of down
+  console.log(await getMissingSeat(allSeats));
 };
