@@ -17,6 +17,13 @@ module.exports.get = async (event, context, callback) => {
         const record = leaderboardData.members[keys[i]];
         leaderboard.push(record);
     }
+    // leaderboard.sort((a, b) => (a.local_score < b.local_score) ? 1 : -1); // Matched AoC Sort logic, I'm adding my own logic below
+    leaderboard.sort(function (a, b) {
+        if (a.stars === b.stars) {
+            return b.local_score - a.local_score;
+        }
+        return a.stars < b.stars ? 1 : -1;
+    });
 
     const emojis = {
         complete: ':star:',
@@ -36,7 +43,6 @@ module.exports.get = async (event, context, callback) => {
         daysInChallenge = dt.getDate();
     }
 
-    leaderboard.sort((a, b) => (a.local_score < b.local_score) ? 1 : -1);
     let message = '*Advent of Code 2020 Leaderboard*';
     let rank = 0;
     let lastScore = -1;
