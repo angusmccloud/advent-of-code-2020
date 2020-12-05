@@ -21,7 +21,7 @@ module.exports.get = async (event, context, callback) => {
     const emojis = {
         complete: ':star:',
         incomplete: ':time-turner:',
-        notStarted: ':o:',
+        notStarted: ':heavy_multiplication_x:',
         1: ':first_place_medal:',
         2: ':second_place_medal:',
         3: ':third_place_medal:'
