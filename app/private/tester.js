@@ -27,11 +27,16 @@ const day5Data = require('../functions/day-5/source-data');
 const getAllSeats = require('../functions/day-5/get-all-seats');
 const getMissingSeat = require('../functions/day-5/get-missing-seat');
 
+const day6Data = require('../functions/day-6/source-data');
+const customsValidation = require('../functions/day-6/customs-validation');
+const customsValidationV2 = require('../functions/day-6/customs-validationv2');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
   // Leaderboard Data
   // const leaderboardData = await getLeaderboardJSON();
+  // console.log(leaderboardData);
 
   // Day 1
   // const inputDataDay1 = await day1Data();
@@ -77,12 +82,20 @@ module.exports.tester = async () => {
   // console.log(await passportValidationV2(inputDataDay4, v2ValidationRules));
 
   // Day 5
-  const inputDataDay5 = await day5Data();
-  console.log('-- Day 5, Question 1 --');
-  let allSeats = await getAllSeats(inputDataDay5);
-  allSeats.sort((a, b) => (a.seatId < b.seatId) ? 1 : -1);
-  console.log(allSeats[0].seatId);
-  console.log('-- Day 5, Question 2 --');
-  allSeats.sort((a, b) => (a.seatId > b.seatId) ? 1 : -1); // Switch the data so it's counting up instead of down
-  console.log(await getMissingSeat(allSeats));
+  // const inputDataDay5 = await day5Data();
+  // console.log('-- Day 5, Question 1 --');
+  // let allSeats = await getAllSeats(inputDataDay5);
+  // allSeats.sort((a, b) => (a.seatId < b.seatId) ? 1 : -1);
+  // console.log(allSeats[0].seatId);
+  // console.log('-- Day 5, Question 2 --');
+  // allSeats.sort((a, b) => (a.seatId > b.seatId) ? 1 : -1); // Switch the data so it's counting up instead of down
+  // console.log(await getMissingSeat(allSeats));
+
+  // Day 6
+  const inputDataDay6 = await day6Data();
+  console.log('-- Day 6, Question 1 --');
+  console.log(await customsValidation(inputDataDay6));
+  console.log('-- Day 6, Question 2 --');
+  console.log(await customsValidationV2(inputDataDay6));
+  
 };
