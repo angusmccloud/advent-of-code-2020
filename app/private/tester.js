@@ -31,6 +31,11 @@ const day6Data = require('../functions/day-6/source-data');
 const customsValidation = require('../functions/day-6/customs-validation');
 const customsValidationV2 = require('../functions/day-6/customs-validationv2');
 
+const day7Data = require('../functions/day-7/source-data');
+const parseBagRules = require('../functions/day-7/parse-bag-rules');
+const day7Question1 = require('../functions/day-7/question1');
+const day7Question2 = require('../functions/day-7/question2');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -92,10 +97,22 @@ module.exports.tester = async () => {
   // console.log(await getMissingSeat(allSeats));
 
   // Day 6
-  const inputDataDay6 = await day6Data();
-  console.log('-- Day 6, Question 1 --');
-  console.log(await customsValidation(inputDataDay6));
-  console.log('-- Day 6, Question 2 --');
-  console.log(await customsValidationV2(inputDataDay6));
+  // const inputDataDay6 = await day6Data();
+  // console.log('-- Day 6, Question 1 --');
+  // console.log(await customsValidation(inputDataDay6));
+  // console.log('-- Day 6, Question 2 --');
+  // console.log(await customsValidationV2(inputDataDay6));
+
+  // Day 7
+  const inputDataDay7 = await day7Data();
+  console.log('-- Day 7, Question 1 --');
+  const allRules = parseBagRules(inputDataDay7);
+  console.log(await day7Question1(allRules));
+  console.log('-- Day 7, Question 2 --');
+  console.log(await day7Question2(allRules));
+
+  
+
+  
   
 };
