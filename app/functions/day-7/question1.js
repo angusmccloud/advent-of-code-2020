@@ -4,7 +4,6 @@ const question1 = (allRules = []) => {
   let couldContainGold = [];
   const checkColor = 'shiny gold';
   let keepRunning = true;
-  let loops = 0;
   while (keepRunning) {
     const startingRows = couldContainGold.length;
     for (let i = 0; i < allRules.length; i++) {
@@ -18,14 +17,11 @@ const question1 = (allRules = []) => {
         }
       }
     }
-    // console.log(loops, startingRows === couldContainGold.length);
     if (startingRows === couldContainGold.length) {
       keepRunning = false;
     }
-    loops++;
   }
-
-  // console.log(couldContainGold);
+  
   return couldContainGold.length;
 }
 

@@ -36,6 +36,10 @@ const parseBagRules = require('../functions/day-7/parse-bag-rules');
 const day7Question1 = require('../functions/day-7/question1');
 const day7Question2 = require('../functions/day-7/question2');
 
+const day8Data = require('../functions/day-8/source-data');
+const loopBreaker = require('../functions/day-8/loop-breaker');
+const loopFixer = require('../functions/day-8/loop-fixer');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -104,13 +108,19 @@ module.exports.tester = async () => {
   // console.log(await customsValidationV2(inputDataDay6));
 
   // Day 7
-  const inputDataDay7 = await day7Data();
-  console.log('-- Day 7, Question 1 --');
-  const allRules = parseBagRules(inputDataDay7);
-  console.log(await day7Question1(allRules));
-  console.log('-- Day 7, Question 2 --');
-  console.log(await day7Question2(allRules));
+  // const inputDataDay7 = await day7Data();
+  // console.log('-- Day 7, Question 1 --');
+  // const allRules = parseBagRules(inputDataDay7);
+  // console.log(await day7Question1(allRules));
+  // console.log('-- Day 7, Question 2 --');
+  // console.log(await day7Question2(allRules));
 
+  // Day 8
+  const inputDataDay8 = await day8Data();
+  console.log('-- Day 8, Question 1 --');
+  console.log(await loopBreaker(inputDataDay8));
+  console.log('-- Day 8, Question 2 --');
+  console.log(await loopFixer(inputDataDay8));
   
 
   
