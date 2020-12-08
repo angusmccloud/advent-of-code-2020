@@ -5,7 +5,6 @@ const loopFixer = (inputData = []) => {
     for(let i = 0; i < inputData.length; i++) {
         let thisRow = inputData[i];
         const command = thisRow.split(" ")[0];
-        result = {accumulator: 0, itBroke: true};
         if(command === 'jmp') {
             inputData[i] = inputData[i].replace('jmp', 'nop');
             result = doesLoopBreak(inputData);
@@ -14,13 +13,14 @@ const loopFixer = (inputData = []) => {
             inputData[i] = inputData[i].replace('nop', 'jmp');
             result = doesLoopBreak(inputData);
             inputData[i] = inputData[i].replace('jmp', 'nop');
+        } else {
+            result = {accumulator: 0, itBroke: true};
         }
         if(!result.itBroke) {
             console.log('Found It!', result);
             break;
         }
     }
-
     return result;
 }
 
