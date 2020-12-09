@@ -40,6 +40,11 @@ const day8Data = require('../functions/day-8/source-data');
 const loopBreaker = require('../functions/day-8/loop-breaker');
 const loopFixer = require('../functions/day-8/loop-fixer');
 
+const day9Data = require('../functions/day-9/source-data');
+const checkTwoNumMatch = require('../functions/day-9/check-for-twonum-match');
+const day9Question1 = require('../functions/day-9/question1');
+const day9Question2 = require('../functions/day-9/question2');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -116,13 +121,18 @@ module.exports.tester = async () => {
   // console.log(await day7Question2(allRules));
 
   // Day 8
-  const inputDataDay8 = await day8Data();
-  console.log('-- Day 8, Question 1 --');
-  console.log(await loopBreaker(inputDataDay8));
-  console.log('-- Day 8, Question 2 --');
-  console.log(await loopFixer(inputDataDay8));
+  // const inputDataDay8 = await day8Data();
+  // console.log('-- Day 8, Question 1 --');
+  // console.log(await loopBreaker(inputDataDay8));
+  // console.log('-- Day 8, Question 2 --');
+  // console.log(await loopFixer(inputDataDay8));
   
-
-  
-  
+  // Day 9
+  const inputDataDay9 = await day9Data();
+  console.log('-- Day 9, Question 1 --');
+  const question1Output = await day9Question1(inputDataDay9);
+  console.log(question1Output);
+  console.log('-- Day 9, Question 2 --');
+  console.log(await day9Question2(inputDataDay9, question1Output));
+    
 };
