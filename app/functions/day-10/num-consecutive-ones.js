@@ -28,16 +28,10 @@ const numConsecutiveOnes = (inputData = []) => {
         }
     }
 
-    let numPossibilities = [1, 1, 2, 4, 7];
-    let incrementPossibilities = [];
-    
-    for(let i = 0; i < consecOnes.length; i++) {
-        incrementPossibilities[i] = Math.pow(numPossibilities[i], consecOnes[i]);
-    }
-    
+    let numPossibilities = [1, 1, 2, 4, 7, 13]; // Number of possibilities for 0 consectutive 1s, 1 consecutive, 2 consecutive, etc...
     let totalPossibilities = 1;
-    for(let i =0; i < incrementPossibilities.length; i++) {
-        totalPossibilities = totalPossibilities * incrementPossibilities[i];
+    for(let i = 0; i < consecOnes.length; i++) {
+        totalPossibilities = totalPossibilities * Math.pow(numPossibilities[i], consecOnes[i]);
     }
 
     return totalPossibilities;
