@@ -1,7 +1,7 @@
 'use strict';
 
 const numConsecutiveOnes = (inputData = []) => {
-    let consecOnes = [];
+    let consecOnes = [0, 0, 0, 0, 0, 0];
     let lastVal = 0;
     let numConsecutive = 0;
     for(let i = 0; i < inputData.length; i++) {
@@ -10,21 +10,13 @@ const numConsecutiveOnes = (inputData = []) => {
         if(diff === 1){
             numConsecutive ++;
         } else {
-            if(consecOnes[numConsecutive] === undefined){
-                consecOnes[numConsecutive] = 1;
-            } else {
-                consecOnes[numConsecutive] ++;
-            }
+            consecOnes[numConsecutive] ++;
             numConsecutive = 0;
         }
         lastVal = val;
 
         if(i === (inputData.length - 1)) { // also close out the last row
-            if(consecOnes[numConsecutive] === undefined){
-                consecOnes[numConsecutive] = 1;
-            } else {
-                consecOnes[numConsecutive] ++;
-            }
+            consecOnes[numConsecutive] ++;
         }
     }
 
