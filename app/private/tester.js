@@ -45,6 +45,10 @@ const checkTwoNumMatch = require('../functions/day-9/check-for-twonum-match');
 const day9Question1 = require('../functions/day-9/question1');
 const day9Question2 = require('../functions/day-9/question2');
 
+const day10Data = require('../functions/day-10/source-data');
+const incrementCountsBySize = require('../functions/day-10/increment-counts-by-size');
+const numConsecutiveOnes = require('../functions/day-10/num-consecutive-ones');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -128,11 +132,20 @@ module.exports.tester = async () => {
   // console.log(await loopFixer(inputDataDay8));
   
   // Day 9
-  const inputDataDay9 = await day9Data();
-  console.log('-- Day 9, Question 1 --');
-  const question1Output = await day9Question1(inputDataDay9);
-  console.log(question1Output);
-  console.log('-- Day 9, Question 2 --');
-  console.log(await day9Question2(inputDataDay9, question1Output));
-    
+  // const inputDataDay9 = await day9Data();
+  // console.log('-- Day 9, Question 1 --');
+  // const question1Output = await day9Question1(inputDataDay9);
+  // console.log(question1Output);
+  // console.log('-- Day 9, Question 2 --');
+  // console.log(await day9Question2(inputDataDay9, question1Output));
+  
+  // Day 10
+  const inputDataDay10 = await day10Data();
+  inputDataDay10.sort(function (a, b) { return a > b ? 1 : -1; });
+  console.log('-- Day 10, Question 1 --');
+  const inputSteps = await incrementCountsBySize(inputDataDay10);
+  console.log(inputSteps[1] * inputSteps[3]);
+  console.log('-- Day 10, Question 2 --');
+  console.log(await(numConsecutiveOnes(inputDataDay10)));
+
 };
