@@ -73,12 +73,15 @@ module.exports.get = async (event, context, callback) => {
         }
         lastScore = score;
 
-        let rankText = `${rank})  `;
+        let rankText = `${rank}) `;
         if (rank <= 3) {
-            rankText = emojis[rank];
+            rankText = `${emojis[rank]} `;
+        }
+        if(rank < 10 && rank > 3) {
+            rankText = rankText + "  ";
         }
 
-        message = message + `\n${rankText}${name}: ${score} points ${starsText}`;
+        message = message + `\n${rankText}${starsText} *${name}*: ${score} points`;
     }
 
     return callback(null, {
