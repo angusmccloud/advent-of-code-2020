@@ -26,7 +26,29 @@ const numConsecutiveOnes = (inputData = []) => {
         totalPossibilities = totalPossibilities * Math.pow(numPossibilities[i], consecOnes[i]);
     }
 
+    // console.log(getPossibilities(0));
+    // console.log(getPossibilities(1));
+    // console.log(getPossibilities(2));
+    // console.log(getPossibilities(3));
+    // console.log(getPossibilities(4));
+    // console.log(getPossibilities(5));
+
     return totalPossibilities;
 }
 
 module.exports = numConsecutiveOnes; 
+
+const getPossibilities = (consecutiveOnes) => {
+    let testData = [0, 3];
+    for (let i = 0; i < consecutiveOnes; i++) {
+        const newVal = testData[testData.length-1] + 1;
+        testData.push(newVal);
+    }
+    const newVal = testData[testData.length-1] + 3;
+    testData.push(newVal);
+
+    let numPossibilities = 1;
+    // ...Do something here :)
+
+    return testData.push(newVal);;
+}

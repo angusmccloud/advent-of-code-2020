@@ -78,7 +78,7 @@ module.exports.get = async (event, context, callback) => {
             rankText = emojis[rank];
         }
 
-        message = message + `\n${rankText}${name} with ${score} points and ${stars} stars: ${starsText}`;
+        message = message + `\n${rankText}${name}: ${score} points ${starsText}`;
     }
 
     return callback(null, {
