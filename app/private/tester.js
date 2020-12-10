@@ -142,6 +142,7 @@ module.exports.tester = async () => {
   // Day 10
   const inputDataDay10 = await day10Data();
   inputDataDay10.sort(function (a, b) { return a > b ? 1 : -1; });
+  inputDataDay10.push(inputDataDay10[inputDataDay10.length - 1] + 3); // Add our device which is +3 on the end
   console.log('-- Day 10, Question 1 --');
   const inputSteps = await incrementCountsBySize(inputDataDay10);
   console.log(inputSteps[1] * inputSteps[3]);
