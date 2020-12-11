@@ -49,6 +49,11 @@ const day10Data = require('../functions/day-10/source-data');
 const incrementCountsBySize = require('../functions/day-10/increment-counts-by-size');
 const numConsecutiveOnes = require('../functions/day-10/num-consecutive-ones');
 
+const day11Data = require('../functions/day-11/source-data');
+const parseDataIntoArrayDay11 = require('../functions/day-11/parse-data-into-array');
+const day11Question1 = require('../functions/day-11/question1');
+const day11Question2 = require('../functions/day-11/question2');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -140,13 +145,23 @@ module.exports.tester = async () => {
   // console.log(await day9Question2(inputDataDay9, question1Output));
   
   // Day 10
-  const inputDataDay10 = await day10Data();
-  inputDataDay10.sort(function (a, b) { return a > b ? 1 : -1; });
-  inputDataDay10.push(inputDataDay10[inputDataDay10.length - 1] + 3); // Add our device which is +3 on the end
-  console.log('-- Day 10, Question 1 --');
-  const inputSteps = await incrementCountsBySize(inputDataDay10);
-  console.log(inputSteps[1] * inputSteps[3]);
-  console.log('-- Day 10, Question 2 --');
-  console.log(await(numConsecutiveOnes(inputDataDay10)));
+  // const inputDataDay10 = await day10Data();
+  // inputDataDay10.sort(function (a, b) { return a > b ? 1 : -1; });
+  // inputDataDay10.push(inputDataDay10[inputDataDay10.length - 1] + 3); // Add our device which is +3 on the end
+  // console.log('-- Day 10, Question 1 --');
+  // const inputSteps = await incrementCountsBySize(inputDataDay10);
+  // console.log(inputSteps[1] * inputSteps[3]);
+  // console.log('-- Day 10, Question 2 --');
+  // console.log(await(numConsecutiveOnes(inputDataDay10)));
+
+  // Day 11
+  const inputDataDay11 = await day11Data();
+  const parsedDay11 = await parseDataIntoArrayDay11(inputDataDay11);
+  // console.log(parsedDay11);
+  console.log('-- Day 11, Question 1 --');
+  console.log(await day11Question1(parsedDay11));
+  console.log('-- Day 11, Question 2 --');
+  console.log(await day11Question2(parsedDay11));
+  
 
 };

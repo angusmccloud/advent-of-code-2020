@@ -34,6 +34,7 @@ const numConsecutiveOnes = (inputData = []) => {
         totalPossibilities = totalPossibilities * Math.pow(numPossibilities[i], consecOnes[i]);
     }
 
+    // console.log(getPossibleCombos(20));
     return totalPossibilities;
 }
 
