@@ -54,6 +54,10 @@ const parseDataIntoArrayDay11 = require('../functions/day-11/parse-data-into-arr
 const day11Question1 = require('../functions/day-11/question1');
 const day11Question2 = require('../functions/day-11/question2');
 
+const day12Data = require('../functions/day-12/source-data');
+const manhattanDistance = require('../functions/day-12/manhattan-distance');
+const movingWaypoint = require('../functions/day-12/moving-waypoint');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -155,13 +159,19 @@ module.exports.tester = async () => {
   // console.log(await(numConsecutiveOnes(inputDataDay10)));
 
   // Day 11
-  const inputDataDay11 = await day11Data();
-  const parsedDay11 = await parseDataIntoArrayDay11(inputDataDay11);
-  // console.log(parsedDay11);
-  console.log('-- Day 11, Question 1 --');
-  console.log(await day11Question1(parsedDay11));
-  console.log('-- Day 11, Question 2 --');
-  console.log(await day11Question2(parsedDay11));
+  // const inputDataDay11 = await day11Data();
+  // const parsedDay11 = await parseDataIntoArrayDay11(inputDataDay11);
+  // // console.log(parsedDay11);
+  // console.log('-- Day 11, Question 1 --');
+  // console.log(await day11Question1(parsedDay11));
+  // console.log('-- Day 11, Question 2 --');
+  // console.log(await day11Question2(parsedDay11));
   
+  // Day 12
+  const inputDataDay12 = await day12Data();
+  console.log('-- Day 12, Question 1 --');
+  console.log(await manhattanDistance(inputDataDay12));
+  console.log('-- Day 12, Question 2 --');
+  console.log(await movingWaypoint(inputDataDay12));
 
 };
