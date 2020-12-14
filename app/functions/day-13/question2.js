@@ -12,22 +12,22 @@ const question2 = (inputData = []) => {
         }
     }
 
-    busses.sort((a, b) => b.busId - a.busId);
+    // busses.sort((a, b) => b.busId - a.busId);
     console.log(busses);
 
-    let result = {result1: -busses[0].offset, result2: 0, diff: busses[0].busId};
+    let result = {result1: -busses[0].offset, result2: 0, diff: busses[0].busId, totalLoops: 0};
 
     for(let i = 0; i < busses.length - 1; i++) {
-        result = findMatch(result.result1, result.diff, busses[i+1].busId, busses[i+1].offset);
+        result = findMatch(result.result1, result.diff, busses[i+1].busId, busses[i+1].offset, result.totalLoops);
         // console.log(result);
     }
-
+    console.log(result);
     return result.result1;
 }
 
 module.exports = question2; 
 
-const findMatch = (startNum, increment, num, offset) => {
+const findMatch = (startNum, increment, num, offset, totalLoops) => {
     let result = 0;
     let i = startNum;
     let target = offset;
@@ -41,12 +41,13 @@ const findMatch = (startNum, increment, num, offset) => {
         if(((remainder === 0 && target === 0) || ((num - target) === remainder)) && possibleTs > increment) {
             result = possibleTs;
         }
-
+        totalLoops++
         i = i + increment;
     }
 
     return {
         result1: result,
-        diff: num * increment
+        diff: num * increment,
+        totalLoops: totalLoops
     };
 }
