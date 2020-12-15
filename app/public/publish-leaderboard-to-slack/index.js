@@ -11,12 +11,12 @@ module.exports.get = async (event, context, callback) => {
     }
 
     const leaderboardData = await getLeaderboardJSON();
-    let leaderboard = [];
-    const keys = Object.keys(leaderboardData.members);
-    for (let i = 0; i < keys.length; i++) {
-        const record = leaderboardData.members[keys[i]];
-        leaderboard.push(record);
-    }
+  let leaderboard = [];
+  const keys = Object.keys(leaderboardData.members);
+  for (let i = 0; i < keys.length; i++) {
+      const record = leaderboardData.members[keys[i]];
+      leaderboard.push(record);
+  }
     // leaderboard.sort((a, b) => (a.local_score < b.local_score) ? 1 : -1); // Matched AoC Sort logic, I'm adding my own logic below
     leaderboard.sort(function (a, b) {
         if (a.stars === b.stars) {
@@ -45,16 +45,13 @@ module.exports.get = async (event, context, callback) => {
 
     let blocks = [];
     let message = '*Advent of Code 2020 Leaderboard*';
-    let rank = 0;
-    let lastScore = -1;
-    let lastStarsText = '';
     for (let i = 0; i < leaderboard.length; i++) {
         const record = leaderboard[i];
         const score = record.local_score;
-        const stars = record.stars;
         const name = record.name;
         const completionData = record.completion_day_level;
-        let starsText = '';
+        let complete = 0;
+        let incomplete = 0;
         for (let ii = 1; ii <= daysInChallenge; ii++) {
             let thisStar;
             if (completionData[ii] === undefined) {
@@ -62,44 +59,37 @@ module.exports.get = async (event, context, callback) => {
             } else {
                 if (completionData[ii][2] === undefined) {
                     thisStar = emojis['incomplete'];
+                    incomplete ++;
                 } else {
                     thisStar = emojis['complete'];
+                    complete ++;
                 }
             }
-
-            starsText = starsText + thisStar;
+        }
+        let string = '\n';
+        if(complete > 0) {
+          string += `${emojis['complete']}${complete}\t`;
+          if(complete < 10){
+            string += '  ';
+          }
+        } else {
+          string += '\t\t\t';
         }
 
-        if (score !== lastScore) {
-            rank = i + 1;
+        if(incomplete > 0) {
+          string += `${emojis['incomplete']}${incomplete}\t`;
+        } else {
+          string += '\t\t\t';
         }
-        lastScore = score;
+        string += `(${score} pts)`;
+        if(score < 10) {
+          string += `    `;
+        } else if (score < 100) {
+          string += `  `;
+        }
+        string += `\t*${name}*`;
 
-        if (i === 0) {
-            message = message + `\n${starsText}`;
-        }
-
-        if (starsText !== lastStarsText && i > 0) {
-            blocks.push({
-                type: 'section',
-                text: {
-                    type: 'mrkdwn',
-                    text: message
-                }
-            });
-            message = starsText;
-        }
-        lastStarsText = starsText;
-
-        let rankText = `${rank}) `;
-        if (rank <= 3) {
-            rankText = `${emojis[rank]} `;
-        }
-        if (rank < 10 && rank > 3) {
-            rankText = rankText + "  ";
-        }
-
-        message = message + `\n${rankText} *${name}*: ${score} points`;
+        message += string;
     }
 
     blocks.push({

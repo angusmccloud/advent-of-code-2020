@@ -72,7 +72,6 @@ module.exports.tester = async () => {
 
   // Leaderboard Data
   // const leaderboardData = await getLeaderboardJSON();
-  // console.log(leaderboardData);
 
   // Day 1
   // const inputDataDay1 = await day1Data();
