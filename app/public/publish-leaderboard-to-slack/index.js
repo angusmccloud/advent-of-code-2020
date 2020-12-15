@@ -43,9 +43,11 @@ module.exports.get = async (event, context, callback) => {
         daysInChallenge = dt.getDate();
     }
 
+    let blocks = [];
     let message = '*Advent of Code 2020 Leaderboard*';
     let rank = 0;
     let lastScore = -1;
+    let lastStarsText = '';
     for (let i = 0; i < leaderboard.length; i++) {
         const record = leaderboard[i];
         const score = record.local_score;
@@ -73,40 +75,57 @@ module.exports.get = async (event, context, callback) => {
         }
         lastScore = score;
 
+        if (i === 0) {
+            message = message + `\n${starsText}`;
+        }
+
+        if (starsText !== lastStarsText && i > 0) {
+            blocks.push({
+                type: 'section',
+                text: {
+                    type: 'mrkdwn',
+                    text: message
+                }
+            });
+            message = starsText;
+        }
+        lastStarsText = starsText;
+
         let rankText = `${rank}) `;
         if (rank <= 3) {
             rankText = `${emojis[rank]} `;
         }
-        if(rank < 10 && rank > 3) {
+        if (rank < 10 && rank > 3) {
             rankText = rankText + "  ";
         }
 
-        message = message + `\n${rankText}${starsText} *${name}*: ${score} points`;
+        message = message + `\n${rankText} *${name}*: ${score} points`;
     }
+
+    blocks.push({
+        type: 'section',
+        text: {
+            type: 'mrkdwn',
+            text: message
+        }
+    });
+
+    blocks.push({
+        type: 'divider'
+    });
+    blocks.push({
+        type: 'section',
+        text: {
+            type: 'mrkdwn',
+            text: `Visit <https://adventofcode.com/|Advent of Code> and join the Leaderboard ${process.env.AOC_LEADERBOARD}`
+        }
+    });
 
     return callback(null, {
         statusCode: 200,
         body: JSON.stringify({
             response_type: 'in_channel',
-            blocks: [
-                {
-                    type: 'section',
-                    text: {
-                        type: 'mrkdwn',
-                        text: message
-                    }
-                },
-                {
-                    type: 'divider'
-                },
-                {
-                    type: 'section',
-                    text: {
-                        type: 'mrkdwn',
-                        text: `Visit <https://adventofcode.com/|Advent of Code> and join the Leaderboard ${process.env.AOC_LEADERBOARD}`
-                    }
-                }
-            ]
+            blocks: blocks
         })
     });
 };

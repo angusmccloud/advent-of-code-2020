@@ -148,7 +148,7 @@ module.exports.tester = async () => {
   // console.log(await loopBreaker(inputDataDay8));
   // console.log('-- Day 8, Question 2 --');
   // console.log(await loopFixer(inputDataDay8));
-  
+
   // Day 9
   // const inputDataDay9 = await day9Data();
   // console.log('-- Day 9, Question 1 --');
@@ -156,7 +156,7 @@ module.exports.tester = async () => {
   // console.log(question1Output);
   // console.log('-- Day 9, Question 2 --');
   // console.log(await day9Question2(inputDataDay9, question1Output));
-  
+
   // Day 10
   // const inputDataDay10 = await day10Data();
   // inputDataDay10.sort(function (a, b) { return a > b ? 1 : -1; });
@@ -175,7 +175,7 @@ module.exports.tester = async () => {
   // console.log(await day11Question1(parsedDay11));
   // console.log('-- Day 11, Question 2 --');
   // console.log(await day11Question2(parsedDay11));
-  
+
   // Day 12
   // const inputDataDay12 = await day12Data();
   // console.log('-- Day 12, Question 1 --');
@@ -193,13 +193,13 @@ module.exports.tester = async () => {
   // console.log(await day13Question2(scheduleData));
 
   // Day 14
-  const inputDataDay14 = await day14Data();
-  const parsedData = await day14ParseData(inputDataDay14);
-  // console.log(parsedData);
-  console.log('-- Day 14, Question 1 --');
-  console.log(await day14Question1(parsedData));
-  console.log('-- Day 14, Question 2 --');
-  console.log(await day14Question2(parsedData));
+  // const inputDataDay14 = await day14Data();
+  // const parsedData = await day14ParseData(inputDataDay14);
+  // // console.log(parsedData);
+  // console.log('-- Day 14, Question 1 --');
+  // console.log(await day14Question1(parsedData));
+  // console.log('-- Day 14, Question 2 --');
+  // console.log(await day14Question2(parsedData));
 
 
 };
