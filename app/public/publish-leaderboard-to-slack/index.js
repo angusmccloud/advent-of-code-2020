@@ -11,12 +11,17 @@ module.exports.get = async (event, context, callback) => {
     }
 
     const leaderboardData = await getLeaderboardJSON();
-  let leaderboard = [];
-  const keys = Object.keys(leaderboardData.members);
-  for (let i = 0; i < keys.length; i++) {
-      const record = leaderboardData.members[keys[i]];
-      leaderboard.push(record);
-  }
+    let leaderboard = [];
+    const keys = Object.keys(leaderboardData.members);
+    // This below line is ugly, you should get rid of it
+    // We're using it because strangers joined our leaderboard (leaderboard ID was posted on a blog)
+    const skipUsers = ['J T', 'dmitrif', 'James C', 'annsofip', 'Brooklyn F', 'jcardente', 'J', '@okflanker', 'BConquest', 'Kevin Majewski', 'Teju Kandula'];
+    for (let i = 0; i < keys.length; i++) {
+        const record = leaderboardData.members[keys[i]];
+        if(!skipUsers.includes(record.name)) {
+          leaderboard.push(record);
+        }  
+    }
     // leaderboard.sort((a, b) => (a.local_score < b.local_score) ? 1 : -1); // Matched AoC Sort logic, I'm adding my own logic below
     leaderboard.sort(function (a, b) {
         if (a.stars === b.stars) {
@@ -59,33 +64,33 @@ module.exports.get = async (event, context, callback) => {
             } else {
                 if (completionData[ii][2] === undefined) {
                     thisStar = emojis['incomplete'];
-                    incomplete ++;
+                    incomplete++;
                 } else {
                     thisStar = emojis['complete'];
-                    complete ++;
+                    complete++;
                 }
             }
         }
         let string = '\n';
-        if(complete > 0) {
-          string += `${emojis['complete']}${complete}\t`;
-          if(complete < 10){
-            string += '  ';
-          }
+        if (complete > 0) {
+            string += `${emojis['complete']}${complete}\t`;
+            if (complete < 10) {
+                string += '  ';
+            }
         } else {
-          string += '\t\t\t';
+            string += '\t\t\t';
         }
 
-        if(incomplete > 0) {
-          string += `${emojis['incomplete']}${incomplete}\t`;
+        if (incomplete > 0) {
+            string += `${emojis['incomplete']}${incomplete}\t`;
         } else {
-          string += '\t\t\t';
+            string += '\t\t\t';
         }
         string += `(${score} pts)`;
-        if(score < 10) {
-          string += `    `;
+        if (score < 10) {
+            string += `    `;
         } else if (score < 100) {
-          string += `  `;
+            string += `  `;
         }
         string += `\t*${name}*`;
 
