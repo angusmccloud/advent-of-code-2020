@@ -67,6 +67,9 @@ const day14ParseData = require('../functions/day-14/parse-data');
 const day14Question1 = require('../functions/day-14/question1');
 const day14Question2 = require('../functions/day-14/question2');
 
+const day15Data = require('../functions/day-15/source-data');
+const day15Question1 = require('../functions/day-15/question1');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -199,6 +202,13 @@ module.exports.tester = async () => {
   // console.log(await day14Question1(parsedData));
   // console.log('-- Day 14, Question 2 --');
   // console.log(await day14Question2(parsedData));
+
+  // Day 15
+  // const inputDataDay15 = await day15Data();
+  // console.log('-- Day 15, Question 1 --');
+  // console.log(await day15Question1(inputDataDay15, 2020));
+  // console.log('-- Day 15, Question 2 --');
+  // console.log(await day15Question1(inputDataDay15, 30000000));
 
 
 };
