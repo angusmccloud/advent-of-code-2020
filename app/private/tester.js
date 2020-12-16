@@ -70,6 +70,10 @@ const day14Question2 = require('../functions/day-14/question2');
 const day15Data = require('../functions/day-15/source-data');
 const day15Question1 = require('../functions/day-15/question1');
 
+const day16Data = require('../functions/day-16/source-data');
+const day16Question1 = require('../functions/day-16/question1');
+const day16Question2 = require('../functions/day-16/question2');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -209,6 +213,18 @@ module.exports.tester = async () => {
   // console.log(await day15Question1(inputDataDay15, 2020));
   // console.log('-- Day 15, Question 2 --');
   // console.log(await day15Question1(inputDataDay15, 30000000));
-
+  
+  // Day 16
+  const inputDataDay16 = await day16Data();
+  console.log('-- Day 16, Question 1 --');
+  const question1Output = await day16Question1(inputDataDay16);
+  console.log(question1Output.sumInvalid);
+  const q2Input = {
+    rules: inputDataDay16.rules,
+    myTicket: inputDataDay16.myTicket,
+    otherTickets: question1Output.validTickets
+  };
+  console.log('-- Day 16, Question 2 --');
+  console.log(await day16Question2(q2Input));
 
 };
