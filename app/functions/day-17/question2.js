@@ -42,7 +42,9 @@ const question2 = (inputData = []) => {
                     outputCube[i][ii][iii] = [];
                     for(let iiii = 0; iiii < cube.length; iiii++) {
                         const numActive = countNearbyActive(i, ii, iii, iiii, cube);
+                        // Something occasionally breaks here, need to research why... Seems to be from the cube expansion function
                         let status = cube[i][ii][iii][iiii];
+
                         // console.log(status, numActive);
                         if(status && numActive !== 2 && numActive !== 3) {
                             status = false;

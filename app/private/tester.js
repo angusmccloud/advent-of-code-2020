@@ -78,6 +78,10 @@ const day17Data = require('../functions/day-17/source-data');
 const day17Question1 = require('../functions/day-17/question1');
 const day17Question2 = require('../functions/day-17/question2');
 
+const day18Data = require('../functions/day-18/source-data');
+const day18Question1 = require('../functions/day-18/question1');
+const day18Question2 = require('../functions/day-18/question2');
+
 module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
@@ -231,10 +235,17 @@ module.exports.tester = async () => {
   // console.log('-- Day 16, Question 2 --');
   // console.log(await day16Question2(q2Input));
 
-  // Day 16
-  const inputDataDay17 = await day17Data();
+  // Day 17
+  // const inputDataDay17 = await day17Data();
   // console.log('-- Day 17, Question 1 --');
   // console.log(await day17Question1(inputDataDay17));
-  console.log('-- Day 17, Question 2 --');
-  console.log(await day17Question2(inputDataDay17));
+  // console.log('-- Day 17, Question 2 --');
+  // console.log(await day17Question2(inputDataDay17));
+
+  // Day 18
+  const inputDataDay18 = await day18Data();
+  console.log('-- Day 18, Question 1 --');
+  console.log(await day18Question1(inputDataDay18));
+  console.log('-- Day 18, Question 2 --');
+  console.log(await day18Question2(inputDataDay18));
 };
