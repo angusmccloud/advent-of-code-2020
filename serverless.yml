@@ -16,6 +16,7 @@ provider:
     AOC_COOKIE: ${env:aocCookie}
     AOC_URL: ${env:aocURL}
     AOC_LEADERBOARD: ${env:aocLeaderboard}
+    AOC_YEAR: ${env:aocYear}
   iamRoleStatements:
     - Effect: Allow
       Action:

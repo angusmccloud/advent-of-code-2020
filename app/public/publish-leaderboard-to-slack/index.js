@@ -49,7 +49,7 @@ module.exports.get = async (event, context, callback) => {
     }
 
     let blocks = [];
-    let message = '*Advent of Code 2020 Leaderboard*';
+    let message = `*Advent of Code ${process.env.AOC_YEAR} Leaderboard*`;
     for (let i = 0; i < leaderboard.length; i++) {
         const record = leaderboard[i];
         const score = record.local_score;
