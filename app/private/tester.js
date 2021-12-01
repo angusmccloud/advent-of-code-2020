@@ -86,7 +86,8 @@ module.exports.tester = async () => {
   const timestamp = new Date().getTime();
 
   // Leaderboard Data
-  // const leaderboardData = await getLeaderboardJSON();
+  const leaderboardData = await getLeaderboardJSON();
+  console.log("-- leaderboardData --",leaderboardData);
 
   // Day 1
   // const inputDataDay1 = await day1Data();
@@ -243,9 +244,9 @@ module.exports.tester = async () => {
   // console.log(await day17Question2(inputDataDay17));
 
   // Day 18
-  const inputDataDay18 = await day18Data();
-  console.log('-- Day 18, Question 1 --');
-  console.log(await day18Question1(inputDataDay18));
-  console.log('-- Day 18, Question 2 --');
-  console.log(await day18Question2(inputDataDay18));
+  // const inputDataDay18 = await day18Data();
+  // console.log('-- Day 18, Question 1 --');
+  // console.log(await day18Question1(inputDataDay18));
+  // console.log('-- Day 18, Question 2 --');
+  // console.log(await day18Question2(inputDataDay18));
 };
